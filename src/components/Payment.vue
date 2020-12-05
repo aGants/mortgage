@@ -8,20 +8,25 @@
         <input id="fee" type="text" class="money-form__input" inputmode="numeric">
 
         <div class="money-form-percent">
-          <input name="percent" type="radio" id="10" value="10" v-model="picked" checked>
-          <label for="10">10%</label>
+          <input name="percent" type="radio" id="10" value="10" class="money-form-percent__radio" v-model="picked">
+          <label for="10" class="money-form-percent__label">
+            10%</label>
 
-          <input name="percent" type="radio" id="15" value="15" v-model="picked">
-          <label for="15">15%</label>
+          <input name="percent" type="radio" id="15" value="15" class="money-form-percent__radio" v-model="picked">
+          <label for="15" class="money-form-percent__label">
+            15%</label>
 
-          <input name="percent" type="radio" id="20" value="20" v-model="picked">
-          <label for="20">20%</label>
+          <input name="percent" type="radio" id="20" value="20" class="money-form-percent__radio" v-model="picked">
+          <label for="20" class="money-form-percent__label">
+            20%</label>
 
-          <input name="percent" type="radio" id="25" value="25" v-model="picked">
-          <label for="25">25%</label>
+          <input name="percent" type="radio" id="25" value="25" class="money-form-percent__radio" v-model="picked">
+          <label for="25" class="money-form-percent__label">
+            25%</label>
 
-          <input name="percent" type="radio" id="30" value="30" v-model="picked">
-          <label for="30">30%</label>
+          <input name="percent" type="radio" id="30" value="30" class="money-form-percent__radio" v-model="picked">
+          <label for="30" class="money-form-percent__label">
+            30%</label>
         </div>
         
         <label for="time" class="label">Срок кредита</label>
@@ -30,9 +35,9 @@
         <label for="rate" class="label">Процентная ставка</label>
         <input id="rate" type="text" class="money-form__input" inputmode="numeric">
 
-        <div class="money-form-buttons">
-          <button class="money-form-button__save">Save</button>
-          <button class="money-form-button__cleaer">Clear</button>
+        <div class="money-form-button">
+          <button class="money-form-button__save btn">Save</button>
+          <button class="money-form-button__clear btn">Clear</button>
         </div>
 
       </div>
@@ -55,7 +60,7 @@
 
 <script>
 export default {
-  name: 'Payment',
+  name: "Payment",
 }
 </script>
 
