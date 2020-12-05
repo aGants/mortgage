@@ -2,10 +2,10 @@
   <div class="money">
       <div class="money-form">
         <label for="cost" class="label">Стоимость недвижимости</label>
-        <input id="cost" type="text" class="money-form__input" inputmode="numeric">
+        <input id="cost" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
 
         <label for="fee" class="label">Первоначальный взнос</label>
-        <input id="fee" type="text" class="money-form__input" inputmode="numeric">
+        <input id="fee" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
 
         <div class="money-form-percent">
           <input name="percent" type="radio" id="10" value="10" class="money-form-percent__radio" v-model="picked">
@@ -30,10 +30,10 @@
         </div>
         
         <label for="time" class="label">Срок кредита</label>
-        <input id="time" type="text" class="money-form__input" inputmode="numeric">
+        <input id="time" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">лет</span>
 
         <label for="rate" class="label">Процентная ставка</label>
-        <input id="rate" type="text" class="money-form__input" inputmode="numeric">
+        <input id="rate" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">%</span>
 
         <div class="money-form-button">
           <button class="money-form-button__save btn">Save</button>

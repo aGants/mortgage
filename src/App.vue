@@ -19,6 +19,10 @@ export default {
 
 $margin: 10px 0;
 
+* {
+  box-sizing: border-box;
+}
+
 .app {
   display: flex;
   justify-content: center;
@@ -35,6 +39,7 @@ $margin: 10px 0;
   display: flex;
   justify-content: space-between;
   gap: 50px;
+  flex-wrap: wrap;
 
   .label {
     display: block;
@@ -43,11 +48,10 @@ $margin: 10px 0;
   }
 
   &-form {
-    width: 300px;
     &-percent {
       display: flex;
       justify-content: space-between;
-      margin: $margin;
+      margin: -10px 0 20px;
 
       &__radio {
         display: none;
@@ -79,6 +83,7 @@ $margin: 10px 0;
     &-button {
       display: flex;
       justify-content: space-between;
+      gap: 10px;
       margin: $margin;
 
       .btn {
@@ -115,11 +120,22 @@ $margin: 10px 0;
         }
       }
     }
+
+    &__etc {
+      display: block;
+      position: relative;
+      left: 87%;
+      top: -25px;
+      padding: auto;
+      width: 25px;
+      text-align: right;
+    }
     
     &__input {
+      display: inline-block;
       width: 100%;
-      height: 25px;
-      padding: 2px 10px;
+      height: 30px;
+      padding: 2px 25px 2px 10px;
       border: 1px solid #ddd;
       border-radius: 5px;
       &:hover, &:focus, &:active  {
