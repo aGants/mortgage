@@ -147,8 +147,23 @@ $margin: 10px 0;
   }
 
   &-total {
-
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 450px;
+    height: 150px;
+    padding: 10px 20px;
+    border-radius: 10px;
     background: #f2f2f2;
+    .label {
+      width: 43%;
+    }
+
+    &__output {
+      display: block;
+      font-size: 20px;
+    }
+
   }
 }
 

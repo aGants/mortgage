@@ -43,17 +43,21 @@
       </div>
 
       <div class="money-total">
-        <span class="label">Ежемесячный платёж</span>
-        <span class="money-total__output"> ₽</span>
+          <p class="label">Ежемесячный платёж
+          <span class="money-total__output"> ₽</span>
+          </p>
+        
+          <p class="label">Необходимый доход
+          <span class="money-total__output"> ₽</span>
+          </p>
 
-        <span class="label">Необходимый доход</span>
-        <span class="money-total__output"> ₽</span>
+          <p class="label">Переплата
+          <span class="money-total__output"> ₽</span>
+          </p>
 
-        <span class="label">Переплата</span>
-        <span class="money-total__output"> ₽</span>
-
-        <span class="label">Тело кредита</span>
-        <span class="money-total__output"> ₽</span>
+          <p class="label">Тело кредита
+          <span class="money-total__output"> ₽</span>
+          </p>
       </div>
   </div>
 </template>
