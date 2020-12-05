@@ -24,10 +24,10 @@
           <label for="30">30%</label>
         </div>
         
-        <label for="time" class="lebel">Срок кредита</label>
+        <label for="time" class="label">Срок кредита</label>
         <input id="time" type="text" class="money-form__input" inputmode="numeric">
 
-        <label for="rate" class="label"></label>
+        <label for="rate" class="label">Процентная ставка</label>
         <input id="rate" type="text" class="money-form__input" inputmode="numeric">
 
         <div class="money-form-buttons">
