@@ -44,19 +44,19 @@
 
       <div class="money-total">
           <p class="label">Ежемесячный платёж
-          <span class="money-total__output"> {{ pay }} ₽</span>
+          <span class="money-total__output"> {{ pay | format }} ₽</span>
           </p>
         
           <p class="label">Необходимый доход
-          <span class="money-total__output"> {{ income }} ₽</span>
+          <span class="money-total__output"> {{ income | format  }} ₽</span>
           </p>
 
           <p class="label">Переплата
-          <span class="money-total__output"> {{ overpay }} ₽</span>
+          <span class="money-total__output"> {{ overpay | format  }} ₽</span>
           </p>
 
           <p class="label">Тело кредита
-          <span class="money-total__output"> {{ credit }} ₽</span>
+          <span class="money-total__output"> {{ credit | format  }} ₽</span>
           </p>
       </div>
   </div>
@@ -130,9 +130,13 @@ export default {
       return (5 * (this.pay / 3)).toFixed(0)
     },
     overpay: function () {
-      return (this.pay * (this.form.time*12) - this.form.cost + this.form.fee)
-    }
-  }
+      return (this.pay * (this.form.time*12)) - this.form.cost + this.form.fee;
+      // криво считает при обновлении страницы
+    },
+  },
+  filters: {
+    format: val => `${val}`.replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 '),
+  },
 }
 </script>
 
