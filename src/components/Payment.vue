@@ -37,7 +37,7 @@
 
         <div class="money-form-button">
           <button class="money-form-button__save btn">Save</button>
-          <button class="money-form-button__clear btn">Clear</button>
+          <button class="money-form-button__clear btn" @click="toClear()">Clear</button>
         </div>
 
       </div>
@@ -87,6 +87,9 @@ export default {
       if (this.form.percent != '') {
         this.form.cost = this.form.fee/this.form.percent*100;
       }
+    },
+    toClear() {
+      this.form.cost = this.form.percent = this.form.fee = this.form.time = this.form.rate = ''
     }
   },
   computed: {
