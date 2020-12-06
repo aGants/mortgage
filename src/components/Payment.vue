@@ -2,38 +2,38 @@
   <div class="money">
       <div class="money-form">
         <label for="cost" class="label">Стоимость недвижимости</label>
-        <input id="cost" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
+        <input v-model="form.cost" id="cost" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
 
         <label for="fee" class="label">Первоначальный взнос</label>
-        <input id="fee" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
+        <input v-model="form.fee" id="fee" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
 
         <div class="money-form-percent">
-          <input name="percent" type="radio" id="10" value="10" class="money-form-percent__radio" v-model="picked">
+          <input v-model="form.percent" name="percent" type="radio" id="10" value="10" class="money-form-percent__radio">
           <label for="10" class="money-form-percent__label">
             10%</label>
 
-          <input name="percent" type="radio" id="15" value="15" class="money-form-percent__radio" v-model="picked">
+          <input v-model="form.percent" name="percent" type="radio" id="15" value="15" class="money-form-percent__radio">
           <label for="15" class="money-form-percent__label">
             15%</label>
 
-          <input name="percent" type="radio" id="20" value="20" class="money-form-percent__radio" v-model="picked">
+          <input v-model="form.percent" name="percent" type="radio" id="20" value="20" class="money-form-percent__radio">
           <label for="20" class="money-form-percent__label">
             20%</label>
 
-          <input name="percent" type="radio" id="25" value="25" class="money-form-percent__radio" v-model="picked">
+          <input v-model="form.percent" name="percent" type="radio" id="25" value="25" class="money-form-percent__radio">
           <label for="25" class="money-form-percent__label">
             25%</label>
 
-          <input name="percent" type="radio" id="30" value="30" class="money-form-percent__radio" v-model="picked">
+          <input v-model="form.percent" name="percent" type="radio" id="30" value="30" class="money-form-percent__radio">
           <label for="30" class="money-form-percent__label">
             30%</label>
         </div>
         
         <label for="time" class="label">Срок кредита</label>
-        <input id="time" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">лет</span>
+        <input v-model="form.time" id="time" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">лет</span>
 
         <label for="rate" class="label">Процентная ставка</label>
-        <input id="rate" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">%</span>
+        <input v-model="form.rate" id="rate" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">%</span>
 
         <div class="money-form-button">
           <button class="money-form-button__save btn">Save</button>
@@ -44,19 +44,19 @@
 
       <div class="money-total">
           <p class="label">Ежемесячный платёж
-          <span class="money-total__output"> ₽</span>
+          <span class="money-total__output"> {{ }} ₽</span>
           </p>
         
           <p class="label">Необходимый доход
-          <span class="money-total__output"> ₽</span>
+          <span class="money-total__output"> {{ }} ₽</span>
           </p>
 
           <p class="label">Переплата
-          <span class="money-total__output"> ₽</span>
+          <span class="money-total__output"> {{ }} ₽</span>
           </p>
 
           <p class="label">Тело кредита
-          <span class="money-total__output"> ₽</span>
+          <span class="money-total__output"> {{ }} ₽</span>
           </p>
       </div>
   </div>
@@ -65,6 +65,17 @@
 <script>
 export default {
   name: "Payment",
+  data() {
+    return {
+      form: {
+        cost: '',
+        fee: '',
+        percent: '10',
+        time: '',
+        rate: ''
+        }
+    }
+  }
 }
 </script>
 
