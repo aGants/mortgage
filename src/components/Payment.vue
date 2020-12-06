@@ -2,29 +2,29 @@
   <div class="money">
       <div class="money-form">
         <label for="cost" class="label">Стоимость недвижимости</label>
-        <input v-model="form.cost" id="cost" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
+        <input @input="calculateFee()" v-model="form.cost" id="cost" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
 
         <label for="fee" class="label">Первоначальный взнос</label>
-        <input v-model="form.fee" id="fee" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
+        <input @input="calculateCost()" v-model="form.fee" id="fee" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
 
         <div class="money-form-percent">
-          <input v-model="form.percent" name="percent" type="radio" id="10" value="10" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="10" value="10" class="money-form-percent__radio">
           <label for="10" class="money-form-percent__label">
             10%</label>
 
-          <input v-model="form.percent" name="percent" type="radio" id="15" value="15" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="15" value="15" class="money-form-percent__radio">
           <label for="15" class="money-form-percent__label">
             15%</label>
 
-          <input v-model="form.percent" name="percent" type="radio" id="20" value="20" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="20" value="20" class="money-form-percent__radio">
           <label for="20" class="money-form-percent__label">
             20%</label>
 
-          <input v-model="form.percent" name="percent" type="radio" id="25" value="25" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="25" value="25" class="money-form-percent__radio">
           <label for="25" class="money-form-percent__label">
             25%</label>
 
-          <input v-model="form.percent" name="percent" type="radio" id="30" value="30" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="30" value="30" class="money-form-percent__radio">
           <label for="30" class="money-form-percent__label">
             30%</label>
         </div>
@@ -44,19 +44,19 @@
 
       <div class="money-total">
           <p class="label">Ежемесячный платёж
-          <span class="money-total__output"> {{ }} ₽</span>
+          <span class="money-total__output"> {{ pay }} ₽</span>
           </p>
         
           <p class="label">Необходимый доход
-          <span class="money-total__output"> {{ }} ₽</span>
+          <span class="money-total__output"> {{ income }} ₽</span>
           </p>
 
           <p class="label">Переплата
-          <span class="money-total__output"> {{ }} ₽</span>
+          <span class="money-total__output"> {{ overpay }} ₽</span>
           </p>
 
           <p class="label">Тело кредита
-          <span class="money-total__output"> {{ }} ₽</span>
+          <span class="money-total__output"> {{ credit }} ₽</span>
           </p>
       </div>
   </div>
@@ -69,11 +69,41 @@ export default {
     return {
       form: {
         cost: '',
+        percent: '',
         fee: '',
-        percent: '10',
         time: '',
         rate: ''
-        }
+        },
+    }
+  },
+  methods: {
+    calculateFee() {
+      if (this.form.percent != '') {
+        this.form.fee = this.form.cost*this.form.percent/100;
+      }
+    },
+
+     calculateCost() {
+      if (this.form.percent != '') {
+        this.form.cost = this.form.fee/this.form.percent*100;
+      }
+    }
+  },
+  computed: {
+    credit: function () {
+      return this.form.cost - this.form.fee;
+    },
+    division: function () {
+      return this.form.rate/1200
+    },
+    pay: function () {
+      return (this.credit * (this.division + (this.division/( ( (1 + this.division)**(this.form.time * 12)) - 1 ) ) ) ).toFixed(0); 
+    },
+    income: function () {
+      return (5 * (this.pay / 3)).toFixed(0)
+    },
+    overpay: function () {
+      return (this.pay * (this.form.time*12) - this.form.cost + this.form.fee)
     }
   }
 }
