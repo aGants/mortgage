@@ -36,7 +36,7 @@
         <input v-model="form.rate" id="rate" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">%</span>
 
         <div class="money-form-button">
-          <button class="money-form-button__save btn">Save</button>
+          <button class="money-form-button__save btn" @click="toSave()">Save</button>
           <button class="money-form-button__clear btn" @click="toClear()">Clear</button>
         </div>
 
@@ -76,6 +76,23 @@ export default {
         },
     }
   },
+  mounted() {
+    if (localStorage.cost) {
+      this.form.cost = localStorage.cost;
+    }
+    if (localStorage.percent) {
+      this.form.percent = localStorage.percent;
+    }
+    if (localStorage.fee) {
+      this.form.fee = localStorage.fee;
+    }
+    if (localStorage.time) {
+      this.form.time = localStorage.time;
+    }
+    if (localStorage.rate) {
+      this.form.rate = localStorage.rate;
+    }
+  },
   methods: {
     calculateFee() {
       if (this.form.percent != '') {
@@ -90,6 +107,13 @@ export default {
     },
     toClear() {
       this.form.cost = this.form.percent = this.form.fee = this.form.time = this.form.rate = ''
+    },
+    toSave() {
+      localStorage.cost = this.form.cost;
+      localStorage.percent = this.form.percent;
+      localStorage.fee = this.form.fee;
+      localStorage.time = this.form.time;
+      localStorage.rate = this.form.rate;
     }
   },
   computed: {
