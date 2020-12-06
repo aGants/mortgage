@@ -104,7 +104,7 @@ $margin: 10px 0;
         &:hover {
           background: #72DCAC
         }
-        &:focus, &:active {
+        &:active {
           background: #8EDCB9;
         }
       }
@@ -115,7 +115,7 @@ $margin: 10px 0;
         &:hover {
           background: #9f9f9f;
         }
-        &:focus, &:active {
+        &:active {
           background: #666666;
         }
       }
