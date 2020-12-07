@@ -133,7 +133,7 @@ $margin: 10px 0;
       display: inline-block;
       width: 100%;
       height: 30px;
-      padding: 2px 25px 2px 10px;
+      padding: 2px 40px 2px 10px;
       border: 1px solid #ddd;
       border-radius: 5px;
       &:hover, &:focus, &:active  {
