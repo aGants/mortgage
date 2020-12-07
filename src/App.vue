@@ -27,24 +27,22 @@ $margin: 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  margin-top: 50px;
+  color: #2c3e50;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
 .money {
   display: flex;
-  justify-content: space-between;
-  gap: 50px;
+  justify-content: center;
+  gap: 20px;
   flex-wrap: wrap;
 
   .label {
     display: block;
     margin: $margin;
-    
   }
 
   &-form {
@@ -148,15 +146,17 @@ $margin: 10px 0;
 
   &-total {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-content: center;
     flex-wrap: wrap;
-    width: 450px;
+    max-width: 400px;
     height: 150px;
-    padding: 10px 20px;
+    padding: 0 10px;
     border-radius: 10px;
     background: #f2f2f2;
     .label {
-      width: 43%;
+      width: 45%;
+      margin-left: 1%;
     }
 
     &__output {
