@@ -149,15 +149,20 @@ export default {
 
     // I - процентная ставка
     division: function () {
-      return this.form.rate/1200
+      if (this.form.rate === '') {
+        return 1
+      } else { return this.form.rate/1200 }
     },
-
     // * P = C * (I / 1200 + (I / 1200) / ((1 + I / 1200) ^ n - 1)), где P - ежемесячный платеж, C - тело кредита,
     // I - процентная ставка, n - срок кредитования (в месяцах)
     pay: function () {
-      return (this.credit * 
-      (this.division + (this.division / ( ( (1 + this.division)**(this.form.time * 12)) - 1 ) ) ) )
-      .toFixed(0); 
+      if (this.form.time === '') {
+        return 0 
+      } else {
+        return (this.credit * 
+        (this.division + (this.division / ( ( (1 + this.division)**(this.form.time * 12)) - 1 ) ) ) )
+        .toFixed(0); 
+      }
     },
 
     // I = 5 * P / 3, где I - необходимый доход, P - ежемесячный платеж
