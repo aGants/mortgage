@@ -11,28 +11,30 @@
         type="text" pattern="[0-9]" class="money-form__input" inputmode="numeric"></money>
         <span class="money-form__etc"> ₽</span>
 
+
         <div class="money-form-percent">
-          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="10" value="10" class="money-form-percent__radio">
-          <label for="10" class="money-form-percent__label">
-            10%</label>
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" 
+          id="10" value="10" class="money-form-percent__radio">
+          <label for="10" class="money-form-percent__label">10%</label>
 
-          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="15" value="15" class="money-form-percent__radio">
-          <label for="15" class="money-form-percent__label">
-            15%</label>
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" 
+          id="15" value="15" class="money-form-percent__radio">
+          <label for="15" class="money-form-percent__label">15%</label>
 
-          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="20" value="20" class="money-form-percent__radio">
-          <label for="20" class="money-form-percent__label">
-            20%</label>
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" 
+          id="20" value="20" class="money-form-percent__radio">
+          <label for="20" class="money-form-percent__label">20%</label>
 
-          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="25" value="25" class="money-form-percent__radio">
-          <label for="25" class="money-form-percent__label">
-            25%</label>
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" 
+          id="25" value="25" class="money-form-percent__radio">
+          <label for="25" class="money-form-percent__label">25%</label>
 
-          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="30" value="30" class="money-form-percent__radio">
-          <label for="30" class="money-form-percent__label">
-            30%</label>
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" 
+          id="30" value="30" class="money-form-percent__radio">
+          <label for="30" class="money-form-percent__label">30%</label>
         </div>
         
+
         <label for="time" class="label">Срок кредита</label>
         <input v-model.number="form.time" id="time" type="number" class="money-form__input" 
         inputmode="numeric"><span class="money-form__etc">лет</span>
@@ -47,6 +49,7 @@
         </div>
 
       </div>
+
 
       <div class="money-total">
           <p class="label">Ежемесячный платёж
@@ -89,6 +92,7 @@ export default {
       }
     }
   },
+
   mounted() {
     if (localStorage.cost) {
       this.form.cost = localStorage.cost;
@@ -106,7 +110,14 @@ export default {
       this.form.rate = localStorage.rate;
     }
   },
+
   methods: {
+    calculateCost() {
+      if (this.form.percent != '') {
+        this.form.cost = this.form.fee/this.form.percent*100;
+      }
+    },
+
     calculateFee() {
       if (this.form.percent != '') {
           if (this.form.cost == '') {
@@ -118,14 +129,10 @@ export default {
       }
     },
 
-     calculateCost() {
-      if (this.form.percent != '') {
-        this.form.cost = this.form.fee/this.form.percent*100;
-      }
-    },
     toClear() {
       this.form.cost = this.form.percent = this.form.fee = this.form.time = this.form.rate = ''
     },
+
     toSave() {
       localStorage.cost = this.form.cost;
       localStorage.percent = this.form.percent;
@@ -135,22 +142,36 @@ export default {
     }
   },
   computed: {
+    // C = W - A, где C - тело кредита, W - стоимость недвижимости, A - первоначальный взнос
     credit: function () {
       return this.form.cost - this.form.fee;
     },
+
+    // I - процентная ставка
     division: function () {
       return this.form.rate/1200
     },
+
+    // * P = C * (I / 1200 + (I / 1200) / ((1 + I / 1200) ^ n - 1)), где P - ежемесячный платеж, C - тело кредита,
+    // I - процентная ставка, n - срок кредитования (в месяцах)
     pay: function () {
-      return (this.credit * (this.division + (this.division/( ( (1 + this.division)**(this.form.time * 12)) - 1 ) ) ) ).toFixed(0); 
+      return (this.credit * 
+      (this.division + (this.division / ( ( (1 + this.division)**(this.form.time * 12)) - 1 ) ) ) )
+      .toFixed(0); 
     },
+
+    // I = 5 * P / 3, где I - необходимый доход, P - ежемесячный платеж
     income: function () {
       return (5 * (this.pay / 3)).toFixed(0)
     },
+
+    // L = P * n - W + A, где L - переплата, P - ежемесячный платеж, n - срок кредитования (в месяцах),
+    //  * W - стоимость недвижимости, A - первоначальный взнос
     overpay: function () {
       return (this.pay * (this.form.time*12)) - this.form.cost + this.form.fee;
     },
   },
+
   filters: {
     format: val => `${val}`.replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 '),
   }
