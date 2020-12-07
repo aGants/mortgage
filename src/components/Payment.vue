@@ -109,7 +109,12 @@ export default {
   methods: {
     calculateFee() {
       if (this.form.percent != '') {
-        this.form.fee = this.form.cost*this.form.percent/100;
+          if (this.form.cost == '') {
+            this.form.cost = this.form.fee/this.form.percent*100;
+          }
+          else {
+            this.form.fee = this.form.cost*this.form.percent/100;
+          }
       }
     },
 
