@@ -1,24 +1,10 @@
-# mortgage
+# [Ипотечный калькулятор](https://agants.github.io/mortgage/)
 
-## Project setup
-```
-npm install
-```
+![](image.jpg)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Функциональность:
+* Данные пересчитываться реактивно
+* При нажатии на кнопку “Save” данные формы сохраняются
+* При нажатии на кнопку “Clear” форма очищается
+* Разряды чисел в полях формы и в результатах вычислений должны разделены пробелами
+* При активации “процентного якоря” поля “стоимость недвижимости” и “первоначальный взнос” становятся связаны
