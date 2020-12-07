@@ -2,38 +2,44 @@
   <div class="money">
       <div class="money-form">
         <label for="cost" class="label">Стоимость недвижимости</label>
-        <input @input="calculateFee()" v-model="form.cost" id="cost" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
+        <money v-bind="money" @input="calculateFee()" v-model="form.cost" id="cost" 
+        type="text" pattern="[0-9]" class="money-form__input" inputmode="numeric"></money>
+        <span class="money-form__etc"> ₽</span>
 
         <label for="fee" class="label">Первоначальный взнос</label>
-        <input @input="calculateCost()" v-model="form.fee" id="fee" type="text" class="money-form__input" inputmode="numeric"> <span class="money-form__etc"> ₽</span>
+        <money v-bind="money" @input="calculateCost()" v-model="form.fee" id="fee"
+        type="text" pattern="[0-9]" class="money-form__input" inputmode="numeric"></money>
+        <span class="money-form__etc"> ₽</span>
 
         <div class="money-form-percent">
-          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="10" value="10" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="10" value="10" class="money-form-percent__radio">
           <label for="10" class="money-form-percent__label">
             10%</label>
 
-          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="15" value="15" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="15" value="15" class="money-form-percent__radio">
           <label for="15" class="money-form-percent__label">
             15%</label>
 
-          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="20" value="20" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="20" value="20" class="money-form-percent__radio">
           <label for="20" class="money-form-percent__label">
             20%</label>
 
-          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="25" value="25" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="25" value="25" class="money-form-percent__radio">
           <label for="25" class="money-form-percent__label">
             25%</label>
 
-          <input @change="calculateFee()" v-model="form.percent" name="percent" type="radio" id="30" value="30" class="money-form-percent__radio">
+          <input @change="calculateFee()" v-model.number="form.percent" name="percent" type="radio" id="30" value="30" class="money-form-percent__radio">
           <label for="30" class="money-form-percent__label">
             30%</label>
         </div>
         
         <label for="time" class="label">Срок кредита</label>
-        <input v-model="form.time" id="time" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">лет</span>
+        <input v-model.number="form.time" id="time" type="number" class="money-form__input" 
+        inputmode="numeric"><span class="money-form__etc">лет</span>
 
         <label for="rate" class="label">Процентная ставка</label>
-        <input v-model="form.rate" id="rate" type="text" class="money-form__input" inputmode="numeric"><span class="money-form__etc">%</span>
+        <input v-model.number="form.rate" id="rate" type="number" class="money-form__input" 
+        inputmode="numeric"><span class="money-form__etc">%</span>
 
         <div class="money-form-button">
           <button class="money-form-button__save btn" @click="toSave()">Save</button>
@@ -63,6 +69,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Payment",
   data() {
@@ -74,6 +81,12 @@ export default {
         time: '',
         rate: ''
         },
+        money: {
+        decimal: ' ',
+        thousands: ' ',
+        precision: 0,
+        masked: false
+      }
     }
   },
   mounted() {
@@ -131,12 +144,11 @@ export default {
     },
     overpay: function () {
       return (this.pay * (this.form.time*12)) - this.form.cost + this.form.fee;
-      // криво считает при обновлении страницы
     },
   },
   filters: {
     format: val => `${val}`.replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 '),
-  },
+  }
 }
 </script>
 
